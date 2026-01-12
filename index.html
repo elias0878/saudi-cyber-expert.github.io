@@ -6,6 +6,444 @@
     <title>أبو نواف الهاكر الأخلاقي - خدمات الأمن السيبراني المتقدمة</title>
     <meta name="description" content="متخصص في خدمات الأمن السيبراني، اختبار الاختراق، تقييم الثغرات، واستشارات الحماية. احمي أنظمتك معنا.">
     <link rel="stylesheet" href="src/css/main.css">
+    <style>
+        /* إعادة تعيين الأنماط الأساسية للموقع */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a1628 0%, #1a2744 50%, #0d1929 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* رأس الصفحة */
+        .main-header {
+            background: rgba(10, 22, 40, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+        }
+
+        .logo-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .logo-text h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .logo-text .subtitle {
+            font-size: 0.85rem;
+            color: #c8a051;
+        }
+
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .main-nav a {
+            color: #c9d1d9;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+            padding: 8px 0;
+            position: relative;
+        }
+
+        .main-nav a:hover,
+        .main-nav a.active {
+            color: #c8a051;
+        }
+
+        .main-nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #c8a051;
+        }
+
+        .header-actions .btn {
+            background: linear-gradient(135deg, #c8a051 0%, #a88940 100%);
+            color: #0a1628;
+            padding: 10px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .header-actions .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(200, 160, 81, 0.4);
+        }
+
+        /* القائمة للجوال */
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .mobile-toggle span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: #ffffff;
+            transition: all 0.3s;
+        }
+
+        /* القسم الرئيسي */
+        .main-content {
+            padding-top: 80px;
+        }
+
+        .hero-section {
+            min-height: calc(100vh - 80px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .hero-container {
+            max-width: 900px;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(200, 160, 81, 0.15);
+            color: #c8a051;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+            border: 1px solid rgba(200, 160, 81, 0.3);
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .hero-title .highlight {
+            color: #c8a051;
+        }
+
+        .hero-description {
+            font-size: 1.15rem;
+            color: #c9d1d9;
+            max-width: 650px;
+            margin: 0 auto 35px;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 50px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #c8a051 0%, #a88940 100%);
+            color: #0a1628;
+            padding: 14px 35px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(200, 160, 81, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #ffffff;
+            padding: 14px 35px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-secondary:hover {
+            border-color: #c8a051;
+            color: #c8a051;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #c8a051;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #8b949e;
+            margin-top: 5px;
+        }
+
+        /* التذييل */
+        .main-footer {
+            background: rgba(10, 22, 40, 0.8);
+            padding: 40px 20px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            font-size: 1.1rem;
+            color: #c8a051;
+            margin-bottom: 20px;
+        }
+
+        .footer-section p {
+            color: #8b949e;
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #c9d1d9;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #c8a051;
+        }
+
+        .contact-info {
+            list-style: none;
+        }
+
+        .contact-info li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+            color: #c9d1d9;
+            font-size: 0.9rem;
+        }
+
+        .contact-info svg {
+            width: 20px;
+            height: 20px;
+            color: #c8a051;
+            flex-shrink: 0;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: #c9d1d9;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            background: #c8a051;
+            color: #0a1628;
+        }
+
+        .social-link svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #8b949e;
+            font-size: 0.85rem;
+        }
+
+        .design-credit {
+            margin-top: 8px;
+            color: #6e7681;
+        }
+
+        /* تصميم متجاوب */
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: flex;
+            }
+
+            .main-nav {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: rgba(10, 22, 40, 0.98);
+                transition: right 0.3s ease;
+                padding: 30px 20px;
+            }
+
+            .main-nav.active {
+                right: 0;
+            }
+
+            .main-nav ul {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .main-nav a {
+                display: block;
+                padding: 15px 0;
+                font-size: 1.1rem;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+
+            .hero-stats {
+                gap: 25px;
+            }
+
+            .stat-number {
+                font-size: 1.8rem;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                padding: 12px 25px;
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-text h1 {
+                font-size: 1.2rem;
+            }
+
+            .hero-title {
+                font-size: 1.6rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- رأس الصفحة -->
@@ -14,15 +452,9 @@
             <div class="logo-section">
                 <div class="logo-icon">
                     <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M32 4L6 18V46L32 60L58 46V18L32 4Z" stroke="currentColor" stroke-width="2" fill="none"/>
-                        <path d="M32 4L6 18V46L32 60L58 46V18L32 4Z" stroke="currentColor" stroke-width="1.5" fill="url(#shield-gradient)"/>
-                        <path d="M20 32L28 40L44 24" stroke="#10B981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                        <defs>
-                            <linearGradient id="shield-gradient" x1="32" y1="4" x2="32" y2="60" gradientUnits="userSpaceOnUse">
-                                <stop stop-color="#064E3B"/>
-                                <stop offset="1" stop-color="#047857"/>
-                            </linearGradient>
-                        </defs>
+                        <path d="M32 4L6 18V46L32 60L58 46V18L32 4Z" stroke="#c8a051" stroke-width="2" fill="none"/>
+                        <path d="M32 4L6 18V46L32 60L58 46V18L32 4Z" stroke="#c8a051" stroke-width="1.5" fill="rgba(200, 160, 81, 0.1)"/>
+                        <path d="M20 32L28 40L44 24" stroke="#c8a051" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </div>
                 <div class="logo-text">
@@ -31,408 +463,70 @@
                 </div>
             </div>
             
-            <nav class="main-nav">
-                <ul class="nav-list">
-                    <li><a href="index.html" class="nav-link active">الرئيسية</a></li>
-                    <li><a href="src/app/services/index.html" class="nav-link">الخدمات</a></li>
-                    <li><a href="src/app/projects/index.html" class="nav-link">المشاريع</a></li>
-                    <li><a href="src/app/faq/index.html" class="nav-link">الأسئلة الشائعة</a></li>
-                    <li><a href="src/app/contact/index.html" class="nav-link">اتصل بنا</a></li>
+            <nav class="main-nav" id="mainNav">
+                <ul>
+                    <li><a href="index.html" class="active">الرئيسية</a></li>
+                    <li><a href="src/app/services/index.html">الخدمات</a></li>
+                    <li><a href="src/app/projects/index.html">المشاريع</a></li>
+                    <li><a href="src/app/faq/index.html">الأسئلة الشائعة</a></li>
+                    <li><a href="src/app/contact/index.html">اتصل بنا</a></li>
                 </ul>
             </nav>
             
             <div class="header-actions">
-                <button class="btn btn-primary" onclick="window.location.href='src/app/services/index.html'">
+                <button class="btn" onclick="window.location.href='src/app/services/index.html'">
                     اطلب خدمة
                 </button>
             </div>
+            
+            <button class="mobile-toggle" id="mobileToggle" aria-label=" القائمة">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </header>
 
     <!-- القسم الرئيسي -->
     <main class="main-content">
-        <!-- قسم البطل -->
         <section class="hero-section">
-            <div class="container">
-                <div class="hero-content">
-                    <div class="hero-badge">متخصص في الأمن السيبراني</div>
-                    <h1 class="hero-title">
-                        حماية أنظمتك من
-                        <span class="highlight">التهديدات الإلكترونية</span>
-                    </h1>
-                    <p class="hero-description">
-                        نقدم خدمات شاملة للأمن السيبراني تشمل اختبار الاختراق، تقييم الثغرات، 
-                        واستشارات الحماية. احمِ مؤسستك مع خبراء معتمدين.
-                    </p>
-                    <div class="hero-actions">
-                        <a href="src/app/services/index.html" class="btn btn-primary btn-large">
-                            <span>استكشف خدماتنا</span>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M5 12h14M12 5l7 7-7 7"/>
-                            </svg>
-                        </a>
-                        <a href="src/app/contact/index.html" class="btn btn-secondary btn-large">
-                            <span>تواصل معنا</span>
-                        </a>
-                    </div>
-                    <div class="hero-stats">
-                        <div class="stat">
-                            <span class="stat-number">500+</span>
-                            <span class="stat-label">خدمة متخصصة</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">150+</span>
-                            <span class="stat-label">مشروع منجز</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">80+</span>
-                            <span class="stat-label">عميل سعيد</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">5+</span>
-                            <span class="stat-label">سنوات خبرة</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="hero-visual">
-                    <div class="shield-illustration">
-                        <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M100 10L20 40V120L100 220L180 120V40L100 10Z" 
-                                  stroke="url(#shield-gradient)" 
-                                  stroke-width="3" 
-                                  fill="none"/>
-                            <path d="M100 10L20 40V120L100 220L180 120V40L100 10Z" 
-                                  stroke="currentColor" 
-                                  stroke-width="1.5" 
-                                  fill="url(#shield-inner)"/>
-                            <path d="M65 120L90 145L140 95" 
-                                  stroke="#10B981" 
-                                  stroke-width="8" 
-                                  stroke-linecap="round" 
-                                  stroke-linejoin="round"/>
-                            <circle cx="55" cy="65" r="3" fill="#10B981" class="pulse-dot"/>
-                            <circle cx="145" cy="65" r="3" fill="#10B981" class="pulse-dot"/>
-                            <circle cx="100" cy="35" r="3" fill="#10B981" class="pulse-dot"/>
-                            <path d="M40 150L20 160" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                            <path d="M160 150L180 160" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                            <defs>
-                                <linearGradient id="shield-gradient" x1="100" y1="10" x2="100" y2="220" gradientUnits="userSpaceOnUse">
-                                    <stop stop-color="#047857"/>
-                                    <stop offset="1" stop-color="#064E3B"/>
-                                </linearGradient>
-                                <linearGradient id="shield-inner" x1="100" y1="10" x2="100" y2="220" gradientUnits="userSpaceOnUse">
-                                    <stop stop-color="#047857" stop-opacity="0.1"/>
-                                    <stop offset="1" stop-color="#064E3B" stop-opacity="0.2"/>
-                                </linearGradient>
-                            </defs>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- قسم الخدمات الرئيسية -->
-        <section class="featured-services-section">
-            <div class="container">
-                <div class="section-header">
-                    <h2>خدماتنا الأساسية</h2>
-                    <p>نقدم مجموعة متكاملة من خدمات الأمن السيبراني لحماية مؤسستك</p>
-                </div>
-                
-                <div class="services-preview-grid">
-                    <div class="service-preview-card">
-                        <div class="service-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                                <path d="M9 12l2 2 4-4"/>
-                            </svg>
-                        </div>
-                        <h3>اختبار الاختراق</h3>
-                        <p>محاكاة هجمات حقيقية لتحديد نقاط الضعف في أنظمتك</p>
-                        <a href="src/app/services/index.html" class="service-link">
-                            اعرف المزيد
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M5 12h14M12 5l7 7-7 7"/>
-                            </svg>
-                        </a>
-                    </div>
-                    
-                    <div class="service-preview-card">
-                        <div class="service-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="11" cy="11" r="8"/>
-                                <path d="M21 21l-4.35-4.35"/>
-                            </svg>
-                        </div>
-                        <h3>تقييم الثغرات</h3>
-                        <p>تحديد وتصنيف الثغرات الأمنية في البنية التحتية</p>
-                        <a href="src/app/services/index.html" class="service-link">
-                            اعرف المزيد
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M5 12h14M12 5l7 7-7 7"/>
-                            </svg>
-                        </a>
-                    </div>
-                    
-                    <div class="service-preview-card">
-                        <div class="service-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                                <circle cx="9" cy="7" r="4"/>
-                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                            </svg>
-                        </div>
-                        <h3>استشارات الحماية</h3>
-                        <p>إرشادات متخصصة لتحسين الوضع الأمني المؤسسي</p>
-                        <a href="src/app/services/index.html" class="service-link">
-                            اعرف المزيد
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M5 12h14M12 5l7 7-7 7"/>
-                            </svg>
-                        </a>
-                    </div>
-                    
-                    <div class="service-preview-card">
-                        <div class="service-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/>
-                                <polyline points="13 2 13 9 20 9"/>
-                            </svg>
-                        </div>
-                        <h3>تحليل البرمجيات الخبيثة</h3>
-                        <p>تحليل ودراسة البرمجيات الخبيثة وتطوير وسائل الحماية</p>
-                        <a href="src/app/services/index.html" class="service-link">
-                            اعرف المزيد
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M5 12h14M12 5l7 7-7 7"/>
-                            </svg>
-                        </a>
-                    </div>
-                    
-                    <div class="service-preview-card">
-                        <div class="service-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-                            </svg>
-                        </div>
-                        <h3>التدريب والتوعية</h3>
-                        <p>برامج تدريبية لرفع الوعي الأمني لدى الموظفين</p>
-                        <a href="src/app/services/index.html" class="service-link">
-                            اعرف المزيد
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M5 12h14M12 5l7 7-7 7"/>
-                            </svg>
-                        </a>
-                    </div>
-                    
-                    <div class="service-preview-card">
-                        <div class="service-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                                <path d="M12 8v4"/>
-                                <path d="M12 16h.01"/>
-                            </svg>
-                        </div>
-                        <h3>الاستجابة للحوادث</h3>
-                        <p>استجابة سريعة وفعالة للحوادث الأمنية والاختراقات</p>
-                        <a href="src/app/services/index.html" class="service-link">
-                            اعرف المزيد
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M5 12h14M12 5l7 7-7 7"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="section-footer">
-                    <a href="src/app/services/index.html" class="btn btn-secondary">
-                        عرض جميع الخدمات
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <div class="hero-container">
+                <div class="hero-badge">متخصص في الأمن السيبراني</div>
+                <h1 class="hero-title">
+                    حماية أنظمتك من
+                    <span class="highlight">التهديدات الإلكترونية</span>
+                </h1>
+                <p class="hero-description">
+                    نقدم خدمات شاملة للأمن السيبراني تشمل اختبار الاختراق، تقييم الثغرات، 
+                    واستشارات الحماية. احمِ مؤسستك مع خبراء معتمدين.
+                </p>
+                <div class="hero-buttons">
+                    <a href="src/app/services/index.html" class="btn-primary">
+                        <span>استكشف خدماتنا</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
                             <path d="M5 12h14M12 5l7 7-7 7"/>
                         </svg>
                     </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- قسم لماذا نحن -->
-        <section class="why-us-section">
-            <div class="container">
-                <div class="why-us-grid">
-                    <div class="why-us-content">
-                        <h2>لماذا تختار أبو نواف؟</h2>
-                        <p>نقدم حلولاً أمنية متكاملة بمعايير احترافية عالية، مع التركيز على حماية بياناتك وأنظمتك بأعلى مستويات الكفاءة.</p>
-                        
-                        <div class="features-list">
-                            <div class="feature-item">
-                                <div class="feature-icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                                        <path d="M9 12l2 2 4-4"/>
-                                    </svg>
-                                </div>
-                                <div class="feature-text">
-                                    <h4>خبرة واسعة</h4>
-                                    <p>سنوات من الخبرة في مجال الأمن السيبراني مع مشاريع ناجحة</p>
-                                </div>
-                            </div>
-                            
-                            <div class="feature-item">
-                                <div class="feature-icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                                        <polyline points="22 4 12 14.01 9 11.01"/>
-                                    </svg>
-                                </div>
-                                <div class="feature-text">
-                                    <h4>شهادات معتمدة</h4>
-                                    <p>نحمل شهادات دولية معتمدة في الأمن السيبراني</p>
-                                </div>
-                            </div>
-                            
-                            <div class="feature-item">
-                                <div class="feature-icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                                    </svg>
-                                </div>
-                                <div class="feature-text">
-                                    <h4>سرية تامة</h4>
-                                    <p>نلتزم بأعلى معايير السرية وحماية بيانات العملاء</p>
-                                </div>
-                            </div>
-                            
-                            <div class="feature-item">
-                                <div class="feature-icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10"/>
-                                        <path d="M12 16v-4"/>
-                                        <path d="M12 8h.01"/>
-                                    </svg>
-                                </div>
-                                <div class="feature-text">
-                                    <h4>دعم مستمر</h4>
-                                    <p>نقدم دعم فني مستمر بعد انتهاء المشروع</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="why-us-visual">
-                        <div class="certification-badge">
-                            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="50" cy="50" r="45" stroke="url(#cert-gradient)" stroke-width="4" fill="none"/>
-                                <circle cx="50" cy="50" r="38" stroke="currentColor" stroke-width="1" fill="none" opacity="0.3"/>
-                                <path d="M50 20L60 35L50 30L40 35L50 20Z" fill="url(#cert-gradient)"/>
-                                <path d="M30 45L40 50L50 45L60 50L70 45" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                                <path d="M25 55L35 60L50 55L65 60L75 55" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                                <path d="M35 70L45 75L50 72L55 75L65 70" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                                <path d="M35 70L35 80L65 80L65 70" stroke="url(#cert-gradient)" stroke-width="3" fill="none"/>
-                                <path d="M40 75L50 80L60 75" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                                <defs>
-                                    <linearGradient id="cert-gradient" x1="50" y1="20" x2="50" y2="80" gradientUnits="userSpaceOnUse">
-                                        <stop stop-color="#047857"/>
-                                        <stop offset="1" stop-color="#064E3B"/>
-                                    </linearGradient>
-                                </defs>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- قسم المشاريع الأخيرة -->
-        <section class="latest-projects-section">
-            <div class="container">
-                <div class="section-header">
-                    <h2>مشاريعنا الأخيرة</h2>
-                    <p>نفتخر بتقديم أفضل حلول الأمن السيبراني لعملائنا</p>
-                </div>
-                
-                <div class="projects-preview-grid">
-                    <div class="project-preview-card">
-                        <div class="project-image">
-                            <div class="project-placeholder">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                                    <path d="M9 12l2 2 4-4"/>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="project-content">
-                            <span class="project-category">اختبار الاختراق</span>
-                            <h3>اختبار اختراق شامل لمصرف</h3>
-                            <p>إجراء اختبار اختراق كامل لأنظمة المصرف</p>
-                        </div>
-                    </div>
-                    
-                    <div class="project-preview-card">
-                        <div class="project-image">
-                            <div class="project-placeholder">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                                    <line x1="3" y1="9" x2="21" y2="9"/>
-                                    <line x1="9" y1="21" x2="9" y2="9"/>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="project-content">
-                            <span class="project-category">تقييم الثغرات</span>
-                            <h3>تقييم شركة تقنية كبرى</h3>
-                            <p>تقييم شامل للبنية التحتية التقنية</p>
-                        </div>
-                    </div>
-                    
-                    <div class="project-preview-card">
-                        <div class="project-image">
-                            <div class="project-placeholder">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                                    <circle cx="9" cy="7" r="4"/>
-                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="project-content">
-                            <span class="project-category">استشارات</span>
-                            <h3>تصميم منظومة أمنية حكومية</h3>
-                            <p>تصميم وتنفيذ منظومة شاملة للأمن السيبراني</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="section-footer">
-                    <a href="src/app/projects/index.html" class="btn btn-secondary">
-                        عرض جميع المشاريع
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
+                    <a href="src/app/contact/index.html" class="btn-secondary">
+                        <span>تواصل معنا</span>
                     </a>
                 </div>
-            </div>
-        </section>
-
-        <!-- قسم CTA -->
-        <section class="cta-section">
-            <div class="container">
-                <div class="cta-content">
-                    <h2>جاهز لتأمين مؤسستك؟</h2>
-                    <p>تواصل معنا الآن للحصول على استشارة مجانية وعرض سعر مخصص لاحتياجاتك الأمنية</p>
-                    <div class="cta-buttons">
-                        <a href="src/app/contact/index.html" class="btn btn-primary btn-large">
-                            <span>تواصل معنا الآن</span>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-                            </svg>
-                        </a>
-                        <a href="src/app/services/index.html" class="btn btn-secondary btn-large">
-                            استكشف الخدمات
-                        </a>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label">خدمة متخصصة</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">150+</span>
+                        <span class="stat-label">مشروع منجز</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">80+</span>
+                        <span class="stat-label">عميل سعيد</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">5+</span>
+                        <span class="stat-label">سنوات خبرة</span>
                     </div>
                 </div>
             </div>
@@ -466,7 +560,6 @@
                         <li><a href="src/app/services/index.html">تقييم الثغرات</a></li>
                         <li><a href="src/app/services/index.html">استشارات الحماية</a></li>
                         <li><a href="src/app/services/index.html">تحليل البرمجيات الخبيثة</a></li>
-                        <li><a href="src/app/services/index.html">تأمين التطبيقات</a></li>
                     </ul>
                 </div>
                 
@@ -477,7 +570,6 @@
                         <li><a href="src/app/services/index.html">الخدمات</a></li>
                         <li><a href="src/app/projects/index.html">المشاريع</a></li>
                         <li><a href="src/app/faq/index.html">الأسئلة الشائعة</a></li>
-                        <li><a href="src/app/contact/index.html">اتصل بنا</a></li>
                     </ul>
                 </div>
                 
@@ -507,6 +599,32 @@
         </div>
     </footer>
 
-    <script src="src/js/main.js"></script>
+    <script>
+        // القائمة للجوال
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        // إغلاق القائمة عند النقر على رابط
+        document.querySelectorAll('.main-nav a').forEach(function(link) {
+            link.addEventListener('click', function() {
+                document.getElementById('mainNav').classList.remove('active');
+                document.getElementById('mobileToggle').classList.remove('active');
+            });
+        });
+
+        // تأثير التمرير للهيدر
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.main-header');
+            if (window.scrollY > 50) {
+                header.style.background = 'rgba(10, 22, 40, 0.98)';
+                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.3)';
+            } else {
+                header.style.background = 'rgba(10, 22, 40, 0.95)';
+                header.style.boxShadow = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
