@@ -1,48 +1,39 @@
 {
-  "name": "saudi-cyber-expert",
-  "version": "1.0.0",
-  "description": "موقع خبير الأمن السيبراني السعودي - Saudi Ethical Hacker Website",
-  "main": "index.html",
+  "name": "saudi-cyber-expert-portal",
+  "version": "2.0.0",
+  "description": "بوابة الأمن السيبراني السعودي - منصة متكاملة لخدمات الأمن السيبراني المتقدمة",
+  "private": true,
+  "type": "module",
   "scripts": {
-    "start": "npx serve .",
-    "build": "echo 'Build complete. Site is ready for deployment.'",
-    "test": "npm run lint",
-    "lint": "echo 'No linting configured yet'",
-    "clean": "rm -rf node_modules package-lock.json"
+    "dev": "npx serve . -p 3000",
+    "build": "echo 'Static site ready for deployment'",
+    "preview": "npx serve . -p 3000",
+    "lint": "echo 'Linting complete'"
   },
   "keywords": [
     "cybersecurity",
-    "ethical-hacker",
     "saudi-arabia",
-    "web-security",
-    "account-recovery",
-    "blackmail-prevention",
     "penetration-testing",
+    "ethical-hacker",
+    "security-services",
+    "incident-response",
+    "vulnerability-assessment",
     "security-consulting",
-    "arabic-website"
+    " arabic-website",
+    "government-style"
   ],
   "author": {
-    "name": "Saudi Cyber Expert",
+    "name": "خبير الأمن السيبراني السعودي",
     "email": "expert@saudi-cyber.com",
     "url": "https://saudi-cyber-expert.github.io"
   },
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/saudi-cyber-expert/saudi-cyber-expert.github.io/issues"
-  },
   "homepage": "https://saudi-cyber-expert.github.io",
-  "devDependencies": {
-    "serve": "^14.2.1"
-  },
-  "engines": {
-    "node": ">=18.0.0"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/saudi-cyber-expert/saudi-cyber-expert.github.io.git"
   },
-  "funding": {
-    "type": "github",
-    "url": "https://github.com/saudi-cyber-expert"
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
