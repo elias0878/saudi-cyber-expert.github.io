@@ -3,21 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="أبو نواف الهاكر الأخلاقي - متخصص في خدمات الأمن السيبراني واختبار الاختراق">
-    <meta name="keywords" content="الأمن السيبراني, هاكر أخلاقي, اختبار الاختراق, تقييم الثغرات, المملكة العربية السعودية">
-    <title>أبو نواف الهاكر الأخلاقي | خدمات الأمن السيبراني المتخصصة</title>
+    <meta name="description" content="مشاريع أبو نواف الهاكر الأخلاقي - دراسات حالة ونجاحات في مجال الأمن السيبراني">
+    <meta name="keywords" content="مشاريع الأمن السيبراني, دراسات حالة, نجاحات, أبو نواف">
+    <title>المشاريع | أبو نواف الهاكر الأخلاقي</title>
     
-    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'><path d='M25 5L5 18V40L25 48L45 40V18L25 5Z' stroke='%23c9a227' stroke-width='2' fill='none'/><path d='M16 30L22 36L34 24' stroke='%23c9a227' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/></svg>">
     
-    <!-- Main Stylesheet -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <!-- Header -->
-    <header class="header" id="header">
-        <div class="header-content">
-            <!-- Logo -->
+    <header class="header">
+        <div class="container header-content">
             <a href="index.html" class="logo">
                 <div class="logo-icon">
                     <svg viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="شعار أبو نواف">
@@ -31,12 +28,11 @@
                 </div>
             </a>
             
-            <!-- Navigation -->
             <nav class="nav" id="mainNav">
                 <ul class="nav-menu">
-                    <li><a href="index.html" class="nav-link active">الرئيسية</a></li>
+                    <li><a href="index.html" class="nav-link">الرئيسية</a></li>
                     <li><a href="services.html" class="nav-link">الخدمات</a></li>
-                    <li><a href="projects.html" class="nav-link">المشاريع</a></li>
+                    <li><a href="projects.html" class="nav-link active">المشاريع</a></li>
                     <li><a href="faq.html" class="nav-link">الأسئلة الشائعة</a></li>
                     <li><a href="contact.html" class="nav-link">اتصل بنا</a></li>
                 </ul>
@@ -48,7 +44,6 @@
                 </a>
             </nav>
             
-            <!-- Mobile Menu Toggle -->
             <button class="mobile-toggle" id="mobileToggle" aria-label="فتح القائمة" aria-expanded="false">
                 <span></span>
                 <span></span>
@@ -59,121 +54,156 @@
 
     <!-- Main Content -->
     <main>
-        <!-- Hero Section -->
-        <section class="hero" id="home">
-            <div class="hero-content">
-                <div class="hero-badge">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                    </svg>
-                    متخصص في الأمن السيبراني
-                </div>
-                <h2 class="hero-title">
-                    حماية أنظمتك من <span class="highlight">التهديدات الإلكترونية</span>
-                </h2>
-                <p class="hero-description">
-                    نقدم خدمات شاملة للأمن السيبراني تشمل اختبار الاختراق، تقييم الثغرات الأمنية، 
-                    واستشارات الحماية المتخصصة لضمان أمان مؤسستك الرقمية.
-                </p>
-                <div class="hero-buttons">
-                    <a href="services.html" class="btn btn-primary">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
-                            <line x1="12" y1="22.08" x2="12" y2="12"/>
-                        </svg>
-                        استكشف خدماتنا
-                    </a>
-                    <a href="contact.html" class="btn btn-secondary">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                        </svg>
-                        تواصل معنا
-                    </a>
-                </div>
-                <div class="hero-stats">
-                    <div class="stat-item">
-                        <span class="stat-number" data-target="500">0</span>
-                        <span class="stat-label">خدمة متخصصة</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number" data-target="150">0</span>
-                        <span class="stat-label">مشروع منجز</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number" data-target="80">0</span>
-                        <span class="stat-label">عميل سعيد</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number" data-target="5">0</span>
-                        <span class="stat-label">سنوات خبرة</span>
-                    </div>
+        <!-- Page Header -->
+        <section class="page-header">
+            <h1>مشاريعنا المنجزة</h1>
+            <p>نظرة على بعض النجاحات والإنجازات التي حققناها في مجال الأمن السيبراني</p>
+        </section>
+
+        <!-- Projects Grid -->
+        <section class="projects-page">
+            <div class="container">
+                <div class="projects-grid">
+                    <!-- Project 1 -->
+                    <article class="project-card">
+                        <div class="project-image">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <div class="project-content">
+                            <h3>تأمين بنية تحتية مصرفية</h3>
+                            <p>قمنا بتقييم شامل وتحسين الأمان للبنية التحتية التقنية لأحد البنوك الكبرى في المملكة، مما أدى إلى اكتشاف وإصلاح أكثر من 50 ثغرة.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">اختبار الاختراق</span>
+                                <span class="project-tag">تقييم الثغرات</span>
+                                <span class="project-tag">القطاع المالي</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 2 -->
+                    <article class="project-card">
+                        <div class="project-image">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                            </svg>
+                        </div>
+                        <div class="project-content">
+                            <h3>حماية منصة حكومية</h3>
+                            <p>تأمين منصة إلكترونية حكومية تتضمن خدمات حساسة للمواطنين، مع تطبيق أعلى معايير الأمان والخصوصية.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">أمن التطبيقات</span>
+                                <span class="project-tag">القطاع الحكومي</span>
+                                <span class="project-tag">الامتثال</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 3 -->
+                    <article class="project-card">
+                        <div class="project-image">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                            </svg>
+                        </div>
+                        <div class="project-content">
+                            <h3>تحليل برمجيات خبيثة</h3>
+                            <p>تحليل وتفكيك هجوم واسع استهدف عدة مؤسسات في المنطقة، وتحديد مصدره وتطوير توقيعات حماية فعالة.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">تحليل البرمجيات الخبيثة</span>
+                                <span class="project-tag">الاستجابة للحوادث</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 4 -->
+                    <article class="project-card">
+                        <div class="project-image">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                        </div>
+                        <div class="project-content">
+                            <h3>برنامج تدريب الأمن السيبراني</h3>
+                            <p>تصميم وتنفيذ برنامج تدريب شامل للموظفين في شركة كبيرة، مما قلل من نجاح هجمات الهندسة الاجتماعية بنسبة 80%.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">التدريب</span>
+                                <span class="project-tag">الهندسة الاجتماعية</span>
+                                <span class="project-tag">التوعية الأمنية</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 5 -->
+                    <article class="project-card">
+                        <div class="project-image">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 16v-4"/>
+                                <path d="M12 8h.01"/>
+                            </svg>
+                        </div>
+                        <div class="project-content">
+                            <h3>مراقبة الأمن السيبراني</h3>
+                            <p>تطوير وتنفيذ مركز عمليات أمنية (SOC) لشركة رائدة، مع أنظمة مراقبة متقدمة للكشف عن التهديدات.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">SOC</span>
+                                <span class="project-tag">المراقبة</span>
+                                <span class="project-tag">الكشف عن التهديدات</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 6 -->
+                    <article class="project-card">
+                        <div class="project-image">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                        </div>
+                        <div class="project-content">
+                            <h3>تأمين البريد الإلكتروني</h3>
+                            <p>تنفيذ حلول متقدمة لحماية البريد الإلكتروني لمنظمة كبيرة، مما منع أكثر من 10,000 محاولة تصيد شهرياً.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">حماية البريد</span>
+                                <span class="project-tag">مكافحة التصيد</span>
+                            </div>
+                        </div>
+                    </article>
                 </div>
             </div>
         </section>
 
-        <!-- Services Preview Section -->
-        <section class="services-preview" id="services">
+        <!-- Stats Section -->
+        <section class="services-preview">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title">خدماتنا <span>المتخصصة</span></h2>
-                    <p class="section-description">
-                        نقدم مجموعة شاملة من خدمات الأمن السيبراني المصممة خصيصاً لحماية مؤسستك 
-                        من التهديدات الإلكترونية المتطورة.
-                    </p>
+                    <h2 class="section-title">أرقام <span>تميزنا</span></h2>
+                    <p class="section-description">نفخر بإنجازاتنا وأرقامنا التي تعكس التزامنا بتقديم أفضل خدمات الأمن السيبراني</p>
                 </div>
-                <div class="services-grid">
-                    <article class="service-card">
-                        <div class="service-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                                <path d="M9 12l2 2 4-4"/>
-                            </svg>
-                        </div>
-                        <h3 class="service-title">اختبار الاختراق</h3>
-                        <p class="service-description">
-                            اختبر أمان أنظمتك من خلال محاكاة هجمات سيبرانية حقيقية 
-                            لاكتشاف الثغرات قبل استغلالها.
-                        </p>
-                    </article>
-                    <article class="service-card">
-                        <div class="service-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="11" cy="11" r="8"/>
-                                <path d="M21 21l-4.35-4.35"/>
-                            </svg>
-                        </div>
-                        <h3 class="service-title">تقييم الثغرات</h3>
-                        <p class="service-description">
-                            مسح شامل لأنظمتك لاكتشاف وتصنيف الثغرات الأمنية 
-                            وتقديم توصيات لمعالجتها.
-                        </p>
-                    </article>
-                    <article class="service-card">
-                        <div class="service-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                                <path d="M12 8v4M12 16h.01"/>
-                            </svg>
-                        </div>
-                        <h3 class="service-title">استشارات الحماية</h3>
-                        <p class="service-description">
-                            نصائح متخصصة لتحسين البنية التحتية الأمنية 
-                            لمؤسستك وفق أفضل الممارسات العالمية.
-                        </p>
-                    </article>
-                    <article class="service-card">
-                        <div class="service-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
-                            </svg>
-                        </div>
-                        <h3 class="service-title">تحليل البرمجيات الخبيثة</h3>
-                        <p class="service-description">
-                            تحليل وتفكيك البرمجيات الخبيثة لفهم سلوكها 
-                            وتطوير وسائل الحماية المناسبة.
-                        </p>
-                    </article>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">150+</span>
+                        <span class="stat-label">مشروع منجز</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label">ثغرة مكتشفة</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">80+</span>
+                        <span class="stat-label">عميل سعيد</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">5+</span>
+                        <span class="stat-label">سنوات خبرة</span>
+                    </div>
                 </div>
             </div>
         </section>
@@ -308,7 +338,6 @@
         </div>
     </footer>
 
-    <!-- Main JavaScript -->
     <script src="js/script.js"></script>
 </body>
 </html>
