@@ -1212,5 +1212,18 @@
     <!-- JavaScript Files -->
     <script src="assets/js/main.js"></script>
     <script src="assets/js/components.js"></script>
+
+    <!-- كود الإنقاذ (Fail-safe) - إخفاء شاشة التحميل تلقائياً بعد 4 ثوانٍ -->
+    <script>
+        (function() {
+            var loadingScreen = document.getElementById('loading-screen');
+            if (loadingScreen) {
+                setTimeout(function() {
+                    loadingScreen.classList.add('hidden');
+                    loadingScreen.style.display = 'none';
+                }, 4000);
+            }
+        })();
+    </script>
 </body>
 </html>

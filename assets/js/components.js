@@ -288,26 +288,26 @@
         },
         
         render: function() {
-            this.element.innerHTML = '
+            this.element.innerHTML = `
                 <div class="countdown">
                     <div class="countdown-item">
                         <span class="countdown-number" data-unit="days">00</span>
-                        <span class="countdown-label">' + this.options.days + '</span>
+                        <span class="countdown-label">${this.options.days}</span>
                     </div>
                     <div class="countdown-item">
                         <span class="countdown-number" data-unit="hours">00</span>
-                        <span class="countdown-label">' + this.options.hours + '</span>
+                        <span class="countdown-label">${this.options.hours}</span>
                     </div>
                     <div class="countdown-item">
                         <span class="countdown-number" data-unit="minutes">00</span>
-                        <span class="countdown-label">' + this.options.minutes + '</span>
+                        <span class="countdown-label">${this.options.minutes}</span>
                     </div>
                     <div class="countdown-item">
                         <span class="countdown-number" data-unit="seconds">00</span>
-                        <span class="countdown-label">' + this.options.seconds + '</span>
+                        <span class="countdown-label">${this.options.seconds}</span>
                     </div>
                 </div>
-            ';
+            `;
             
             this.elements = {
                 days: this.element.querySelector('[data-unit="days"]'),
@@ -363,12 +363,12 @@
         createProgressBar: function() {
             const progress = document.createElement('div');
             progress.className = 'form-progress';
-            progress.innerHTML = '
+            progress.innerHTML = `
                 <div class="progress-bar">
                     <div class="progress-fill" style="width: 0%"></div>
                 </div>
                 <div class="progress-steps"></div>
-            ';
+            `;
             
             this.form.insertBefore(progress, this.form.firstChild);
             
