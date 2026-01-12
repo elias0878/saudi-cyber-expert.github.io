@@ -35,13 +35,25 @@
     
     /* ==================== شاشة التحميل ==================== */
     function hideLoadingScreen() {
-        if (DOM.loadingScreen) {
-            window.addEventListener('load', function() {
-                setTimeout(function() {
-                    DOM.loadingScreen.classList.add('hidden');
-                }, 500);
-            });
+        if (!DOM.loadingScreen) return;
+        
+        // الطريقة 1: إذا كانت الصفحة محملة بالفعل
+        if (document.readyState === 'complete') {
+            DOM.loadingScreen.classList.add('hidden');
+            return;
         }
+        
+        // الطريقة 2: عند حدث load
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                DOM.loadingScreen.classList.add('hidden');
+            }, 300);
+        });
+        
+        // الطريقة 3:_timeout كضمان - بعد 3 ثوانٍ إخفاء الشاشة دائماً
+        setTimeout(function() {
+            DOM.loadingScreen.classList.add('hidden');
+        }, 3000);
     }
     
     /* ==================== قائمة الجوال ==================== */
@@ -418,18 +430,18 @@
         
         const notification = document.createElement('div');
         notification.className = 'notification ' + type;
-        notification.innerHTML = '
+        notification.innerHTML = `
             <div class="notification-icon">
-                <i class="fas ' + icons[type] + '"></i>
+                <i class="fas ${icons[type]}"></i>
             </div>
             <div class="notification-content">
-                <div class="notification-title">' + title + '</div>
-                <div class="notification-message">' + message + '</div>
+                <div class="notification-title">${title}</div>
+                <div class="notification-message">${message}</div>
             </div>
             <div class="notification-close">
                 <i class="fas fa-times"></i>
             </div>
-        ';
+        `;
         
         document.body.appendChild(notification);
         
