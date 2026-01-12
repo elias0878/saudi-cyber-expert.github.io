@@ -2,16 +2,13 @@
  * JavaScript الرئيسي - Saudi Cyber Expert Portal
  * 
  * الوظائف الرئيسية:
- * - إدارة شاشة التحميل
- * - القائمة المتنقلة
+ * - إدارة القائمة المتنقلة
  * - تأثيرات التمرير
  * - التنقل السلس
  * - النماذج والإشعارات
- * - الأسئلة الشائعة
  * - عداد الإحصائيات
- * - إدارة الخدمات والتصفية
  * 
- * الإصدار: 2.0
+ * الإصدار: 2.0 - مُحسّن للتوافق
  */
 
 (function() {
@@ -20,7 +17,6 @@
   /* ==================== المتغيرات العامة ==================== */
   const DOM = {
     // العناصر الرئيسية
-    loadingScreen: null,
     mainHeader: null,
     mobileToggle: null,
     navMenu: null,
@@ -41,8 +37,7 @@
     
     // الخدمات
     serviceCards: null,
-    filterCategories: null,
-    filterSearch: null,
+    filterButtons: null,
     
     // الإشعارات
     notifications: null
@@ -50,23 +45,24 @@
 
   /* ==================== تهيئة الموقع ==================== */
   function init() {
-    cacheElements();
-    bindEvents();
-    initComponents();
-    hideLoadingScreen();
-    initScrollEffects();
-    initNavigation();
-    initAnimations();
-    initCounters();
-    initFAQ();
-    initForms();
-    initServiceFilters();
+    try {
+      cacheElements();
+      bindEvents();
+      initComponents();
+      initScrollEffects();
+      initNavigation();
+      initAnimations();
+      initCounters();
+      initFAQ();
+      initForms();
+    } catch (error) {
+      console.log('تم تهيئة بعض المكونات: ' + error.message);
+    }
   }
 
   /* ==================== تخزين العناصر ==================== */
   function cacheElements() {
-    DOM.loadingScreen = document.getElementById('loading-screen');
-    DOM.mainHeader = document.getElementById('main-header');
+    DOM.mainHeader = document.querySelector('.main-header');
     DOM.mobileToggle = document.querySelector('.mobile-toggle');
     DOM.navMenu = document.querySelector('.nav-menu');
     DOM.navLinks = document.querySelectorAll('.nav-link');
@@ -74,10 +70,9 @@
     DOM.contactForm = document.getElementById('contact-form');
     DOM.faqItems = document.querySelectorAll('.faq-item');
     DOM.sections = document.querySelectorAll('section[id]');
-    DOM.statNumbers = document.querySelectorAll('.stat-number[data-count]');
-    DOM.serviceCards = document.querySelectorAll('.service-card');
-    DOM.filterCategories = document.querySelectorAll('.filter-category');
-    DOM.filterSearch = document.querySelector('.filter-search input');
+    DOM.statNumbers = document.querySelectorAll('.stat-number');
+    DOM.serviceCards = document.querySelectorAll('.service-card, .service-preview-card');
+    DOM.filterButtons = document.querySelectorAll('.filter-btn, .category-card');
   }
 
   /* ==================== ربط الأحداث ==================== */
@@ -86,12 +81,10 @@
     if (DOM.mobileToggle && DOM.navMenu) {
       DOM.mobileToggle.addEventListener('click', toggleMobileMenu);
       
-      // إغلاق القائمة عند النقر على رابط
       DOM.navLinks.forEach(function(link) {
         link.addEventListener('click', closeMobileMenu);
       });
       
-      // إغلاق القائمة عند النقر خارجها
       document.addEventListener('click', function(e) {
         if (!DOM.navMenu.contains(e.target) && !DOM.mobileToggle.contains(e.target)) {
           closeMobileMenu();
@@ -104,102 +97,37 @@
       DOM.backToTop.addEventListener('click', scrollToTop);
     }
     
-    // نموذج التواصل
-    if (DOM.contactForm) {
-      DOM.contactForm.addEventListener('submit', handleFormSubmit);
-      
-      // التحقق من الحقول
-      const inputs = DOM.contactForm.querySelectorAll('input, textarea, select');
-      inputs.forEach(function(input) {
-        input.addEventListener('blur', function() {
-          validateField(this);
-        });
-        
-        input.addEventListener('input', function() {
-          if (this.closest('.form-group').classList.contains('has-error')) {
-            validateField(this);
-          }
-        });
-      });
-    }
-    
     // فلاتر الخدمات
-    if (DOM.filterCategories.length > 0) {
-      DOM.filterCategories.forEach(function(category) {
-        category.addEventListener('click', function() {
-          handleCategoryFilter(this);
+    if (DOM.filterButtons && DOM.filterButtons.length) {
+      DOM.filterButtons.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          handleFilterClick(this);
         });
       });
-    }
-    
-    if (DOM.filterSearch) {
-      DOM.filterSearch.addEventListener('input', debounce(handleSearchFilter, 300));
     }
   }
 
   /* ==================== تهيئة المكونات ==================== */
   function initComponents() {
-    // تهيئة التمرير السلس
+    createNotificationContainer();
     initSmoothScroll();
-    
-    // تهيئة القوائم المنسدلة
-    initDropdowns();
-    
-    // تهيئة النوافذ المنبثقة (Modals)
-    initModals();
-    
-    // تهيئة النسخ إلى الحافظة
-    initCopyButtons();
-  }
-
-  /* ==================== شاشة التحميل ==================== */
-  function hideLoadingScreen() {
-    if (!DOM.loadingScreen) return;
-    
-    // الطريقة 1: إذا كانت الصفحة محملة بالفعل
-    if (document.readyState === 'complete') {
-      DOM.loadingScreen.classList.add('hidden');
-      setTimeout(function() {
-        DOM.loadingScreen.style.display = 'none';
-      }, 500);
-      return;
-    }
-    
-    // الطريقة 2: عند حدث load
-    window.addEventListener('load', function() {
-      setTimeout(function() {
-        DOM.loadingScreen.classList.add('hidden');
-        setTimeout(function() {
-          DOM.loadingScreen.style.display = 'none';
-        }, 500);
-      }, 300);
-    });
-    
-    // الطريقة 3: Timeout كضمان - بعد 4 ثوانٍ إخفاء الشاشة دائماً
-    setTimeout(function() {
-      DOM.loadingScreen.classList.add('hidden');
-      setTimeout(function() {
-        DOM.loadingScreen.style.display = 'none';
-      }, 500);
-    }, 4000);
+    initPlaceholders();
   }
 
   /* ==================== القائمة المتنقلة ==================== */
   function toggleMobileMenu() {
-    if (!DOM.mobileToggle || !DOM.navMenu) return;
+    if (!DOM.navMenu || !DOM.mobileToggle) return;
     
-    DOM.mobileToggle.classList.toggle('active');
     DOM.navMenu.classList.toggle('active');
-    
-    // منع/سماح التمرير في الخلفية
+    DOM.mobileToggle.classList.toggle('active');
     document.body.style.overflow = DOM.navMenu.classList.contains('active') ? 'hidden' : '';
   }
 
   function closeMobileMenu() {
-    if (!DOM.mobileToggle || !DOM.navMenu) return;
+    if (!DOM.navMenu || !DOM.mobileToggle) return;
     
-    DOM.mobileToggle.classList.remove('active');
     DOM.navMenu.classList.remove('active');
+    DOM.mobileToggle.classList.remove('active');
     document.body.style.overflow = '';
   }
 
@@ -212,7 +140,6 @@
     window.addEventListener('scroll', function() {
       const currentScroll = window.pageYOffset;
       
-      // زر العودة للأعلى
       if (DOM.backToTop) {
         if (currentScroll > 300) {
           DOM.backToTop.classList.add('visible');
@@ -221,7 +148,6 @@
         }
       }
       
-      // إخفاء/إظهار الرأس عند التمرير
       if (currentScroll > lastScroll && currentScroll > 100) {
         DOM.mainHeader.style.transform = 'translateY(-100%)';
       } else {
@@ -229,22 +155,20 @@
       }
       lastScroll = currentScroll;
       
-      // تغيير خلفية الرأس
       if (currentScroll > 50) {
-        DOM.mainHeader.style.background = 'rgba(13, 25, 47, 0.98)';
-        DOM.mainHeader.style.backdropFilter = 'blur(10px)';
+        DOM.mainHeader.style.background = 'rgba(10, 25, 47, 0.98)';
+        DOM.mainHeader.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.3)';
       } else {
-        DOM.mainHeader.style.background = 'rgba(13, 25, 47, 0.95)';
-        DOM.mainHeader.style.backdropFilter = 'blur(10px)';
+        DOM.mainHeader.style.background = 'rgba(10, 25, 47, 0.95)';
+        DOM.mainHeader.style.boxShadow = 'none';
       }
     }, { passive: true });
   }
 
   /* ==================== التنقل ==================== */
   function initNavigation() {
-    if (!DOM.sections.length) return;
+    if (!DOM.sections || !DOM.sections.length) return;
     
-    // التنقل النشط حسب القسم
     function setActiveNav() {
       const scrollPos = window.scrollY + 150;
       
@@ -252,13 +176,16 @@
         const sectionTop = section.offsetTop;
         const sectionHeight = section.offsetHeight;
         const sectionId = section.getAttribute('id');
-        const navLink = document.querySelector('.nav-link[href="#' + sectionId + '"]');
         
-        if (navLink && scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
-          DOM.navLinks.forEach(function(link) {
-            link.classList.remove('active');
-          });
-          navLink.classList.add('active');
+        if (sectionId) {
+          const navLink = document.querySelector('.nav-link[href*="' + sectionId + '"]');
+          
+          if (navLink && scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+            DOM.navLinks.forEach(function(link) {
+              link.classList.remove('active');
+            });
+            navLink.classList.add('active');
+          }
         }
       });
     }
@@ -290,7 +217,6 @@
             behavior: 'smooth'
           });
           
-          // إغلاق قائمة الجوال إذا كانت مفتوحة
           if (DOM.navMenu && DOM.navMenu.classList.contains('active')) {
             closeMobileMenu();
           }
@@ -308,7 +234,6 @@
 
   /* ==================== الأنيميشن ==================== */
   function initAnimations() {
-    // العناصر المتحركة عند التمرير
     const animatedElements = document.querySelectorAll('.animate-on-scroll');
     
     if ('IntersectionObserver' in window) {
@@ -329,8 +254,7 @@
       });
     }
     
-    // تأثيرات على البطاقات
-    const cards = document.querySelectorAll('.service-card, .certification-card, .project-card, .blog-card');
+    const cards = document.querySelectorAll('.service-card, .service-preview-card, .certification-card, .project-card');
     
     cards.forEach(function(card) {
       card.classList.add('animate-on-scroll');
@@ -347,14 +271,34 @@
 
   /* ==================== العدادات ==================== */
   function initCounters() {
-    if (!DOM.statNumbers.length) return;
+    if (!DOM.statNumbers || !DOM.statNumbers.length) return;
+    
+    const counters = [];
+    
+    DOM.statNumbers.forEach(function(counter) {
+      let targetValue = counter.textContent.replace(/[^0-9]/g, '');
+      if (targetValue) {
+        counters.push({
+          element: counter,
+          target: parseInt(targetValue, 10),
+          current: 0
+        });
+      }
+    });
+    
+    if (!counters.length) return;
     
     if ('IntersectionObserver' in window) {
       const observer = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
           if (entry.isIntersecting) {
-            animateCounter(entry.target);
-            observer.unobserve(entry.target);
+            const counter = counters.find(function(c) {
+              return c.element === entry.target;
+            });
+            if (counter) {
+              animateCounter(counter);
+              observer.unobserve(entry.target);
+            }
           }
         });
       }, { threshold: 0.5 });
@@ -365,19 +309,17 @@
     }
   }
 
-  function animateCounter(element) {
-    const target = parseInt(element.getAttribute('data-count'));
+  function animateCounter(counter) {
     const duration = 2000;
-    const step = target / (duration / 16);
-    let current = 0;
+    const step = counter.target / (duration / 16);
     
     function update() {
-      current += step;
-      if (current < target) {
-        element.textContent = Math.floor(current);
+      counter.current += step;
+      if (counter.current < counter.target) {
+        counter.element.textContent = Math.floor(counter.current);
         requestAnimationFrame(update);
       } else {
-        element.textContent = target;
+        counter.element.textContent = counter.target;
       }
     }
     
@@ -386,7 +328,7 @@
 
   /* ==================== الأسئلة الشائعة ==================== */
   function initFAQ() {
-    if (!DOM.faqItems.length) return;
+    if (!DOM.faqItems || !DOM.faqItems.length) return;
     
     DOM.faqItems.forEach(function(item) {
       const question = item.querySelector('.faq-question');
@@ -395,27 +337,20 @@
         question.addEventListener('click', function() {
           const isOpen = item.classList.contains('open');
           
-          // إغلاق جميع العناصر
           DOM.faqItems.forEach(function(faq) {
             faq.classList.remove('open');
             const answer = faq.querySelector('.faq-answer');
             if (answer) {
               answer.style.maxHeight = '0';
             }
-            const q = faq.querySelector('.faq-question');
-            if (q) {
-              q.classList.remove('active');
-            }
           });
           
-          // فتح العنصر الحالي إذا لم يكن مفتوحاً
           if (!isOpen) {
             item.classList.add('open');
             const answer = item.querySelector('.faq-answer');
             if (answer) {
               answer.style.maxHeight = answer.scrollHeight + 'px';
             }
-            this.classList.add('active');
           }
         });
       }
@@ -424,369 +359,112 @@
 
   /* ==================== النماذج ==================== */
   function initForms() {
-    // التحقق من صحة النموذج
-    window.validateForm = function(formId) {
-      const form = document.getElementById(formId);
-      if (!form) return false;
-      
-      let isValid = true;
-      const requiredFields = form.querySelectorAll('[required]');
-      
-      requiredFields.forEach(function(field) {
-        if (!validateField(field)) {
-          isValid = false;
-        }
-      });
-      
-      return isValid;
-    };
-  }
-
-  function validateField(input) {
-    const value = input.value.trim();
-    const parent = input.closest('.form-group');
-    
-    if (!parent) return true;
-    
-    // الحقول المطلوبة
-    if (input.required && !value) {
-      parent.classList.add('has-error');
-      return false;
-    }
-    
-    // التحقق من البريد الإلكتروني
-    if (input.type === 'email' && value) {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(value)) {
-        parent.classList.add('has-error');
-        return false;
-      }
-    }
-    
-    // التحقق من رقم الهاتف
-    if (input.type === 'tel' && value) {
-      const phoneRegex = /^05\d{8}$/;
-      if (!phoneRegex.test(value)) {
-        parent.classList.add('has-error');
-        return false;
-      }
-    }
-    
-    parent.classList.remove('has-error');
-    return true;
-  }
-
-  function handleFormSubmit(e) {
-    e.preventDefault();
-    
     if (!DOM.contactForm) return;
     
-    const formData = new FormData(DOM.contactForm);
-    const data = {};
-    
-    formData.forEach(function(value, key) {
-      data[key] = value;
+    DOM.contactForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const formData = new FormData(this);
+      const data = {};
+      
+      formData.forEach(function(value, key) {
+        data[key] = value;
+      });
+      
+      showNotification('تم إرسال رسالتك بنجاح! سنقوم بالرد عليك قريباً.', 'success');
+      
+      this.reset();
     });
     
-    // التحقق من البيانات
-    if (!validateContactForm(data)) {
-      return;
-    }
+    const inputs = DOM.contactForm.querySelectorAll('input, textarea, select');
     
-    // إرسال النموذج
-    submitContactForm(data);
-  }
-
-  function validateContactForm(data) {
-    let isValid = true;
-    
-    if (!data.name || data.name.trim().length < 2) {
-      showNotification('warning', 'بيانات ناقصة', 'يرجى إدخال الاسم الكامل بشكل صحيح');
-      isValid = false;
-    }
-    
-    if (!data.phone || !/^05\d{8}$/.test(data.phone)) {
-      showNotification('warning', 'بيانات ناقصة', 'يرجى إدخال رقم هاتف صحيح');
-      isValid = false;
-    }
-    
-    if (!data.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
-      showNotification('warning', 'بيانات ناقصة', 'يرجى إدخال بريد إلكتروني صحيح');
-      isValid = false;
-    }
-    
-    if (!data.message || data.message.trim().length < 10) {
-      showNotification('warning', 'بيانات ناقصة', 'يرجى وصف المشكلة بشكل مفصل');
-      isValid = false;
-    }
-    
-    return isValid;
-  }
-
-  function submitContactForm(data) {
-    const submitBtn = DOM.contactForm.querySelector('.btn-submit');
-    if (!submitBtn) return;
-    
-    const originalText = submitBtn.innerHTML;
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
-    submitBtn.disabled = true;
-    
-    // محاكاة إرسال النموذج
-    setTimeout(function() {
-      console.log('Form submitted:', data);
+    inputs.forEach(function(input) {
+      input.addEventListener('focus', function() {
+        this.parentElement.classList.add('focused');
+      });
       
-      showNotification('success', 'تم الإرسال بنجاح', 'سنقوم بالرد عليك خلال 24 ساعة');
-      
-      if (DOM.contactForm) {
-        DOM.contactForm.reset();
-      }
-      
-      submitBtn.innerHTML = originalText;
-      submitBtn.disabled = false;
-    }, 2000);
+      input.addEventListener('blur', function() {
+        this.parentElement.classList.remove('focused');
+        if (this.value) {
+          this.parentElement.classList.add('has-value');
+        } else {
+          this.parentElement.classList.remove('has-value');
+        }
+      });
+    });
   }
 
   /* ==================== فلاتر الخدمات ==================== */
-  function initServiceFilters() {
-    // تهيئة الفلاتر إذا كانت موجودة
-    if (DOM.filterCategories.length > 0) {
-      // تعيين الفئة الأولى كفعالة
-      DOM.filterCategories[0].classList.add('active');
-    }
-  }
-
-  function handleCategoryFilter(element) {
-    // تحديث الفئة النشطة
-    DOM.filterCategories.forEach(function(cat) {
-      cat.classList.remove('active');
-    });
-    element.classList.add('active');
+  function handleFilterClick(button) {
+    if (!DOM.serviceCards || !DOM.serviceCards.length) return;
     
-    // تصفية البطاقات
-    const category = element.getAttribute('data-category');
-    filterServiceCards(category, DOM.filterSearch ? DOM.filterSearch.value : '');
-  }
-
-  function handleSearchFilter() {
-    const activeCategory = document.querySelector('.filter-category.active');
-    const category = activeCategory ? activeCategory.getAttribute('data-category') : 'all';
-    const searchTerm = DOM.filterSearch.value.toLowerCase();
-    
-    filterServiceCards(category, searchTerm);
-  }
-
-  function filterServiceCards(category, searchTerm) {
-    if (!DOM.serviceCards.length) return;
+    const filter = button.getAttribute('data-filter') || 'all';
     
     DOM.serviceCards.forEach(function(card) {
-      const cardCategory = card.getAttribute('data-category');
-      const title = card.querySelector('.service-title').textContent.toLowerCase();
-      const description = card.querySelector('.service-description').textContent.toLowerCase();
+      const category = card.getAttribute('data-category');
       
-      const matchesCategory = category === 'all' || cardCategory === category;
-      const matchesSearch = searchTerm === '' || 
-        title.includes(searchTerm) || 
-        description.includes(searchTerm);
-      
-      if (matchesCategory && matchesSearch) {
-        card.style.display = 'block';
-        card.style.animation = 'fadeInUp 0.5s ease';
+      if (filter === 'all' || category === filter) {
+        card.style.display = '';
+        card.classList.add('animate-on-scroll');
       } else {
         card.style.display = 'none';
       }
     });
   }
 
-  /* ==================== القوائم المنسدلة ==================== */
-  function initDropdowns() {
-    const dropdowns = document.querySelectorAll('.dropdown');
-    
-    dropdowns.forEach(function(dropdown) {
-      const toggle = dropdown.querySelector('.dropdown-toggle');
-      
-      if (toggle) {
-        toggle.addEventListener('click', function(e) {
-          e.preventDefault();
-          dropdown.classList.toggle('open');
-        });
-        
-        // إغلاق عند النقر خارج القائمة
-        document.addEventListener('click', function(e) {
-          if (!dropdown.contains(e.target)) {
-            dropdown.classList.remove('open');
-          }
-        });
-      }
-    });
-  }
-
-  /* ==================== النوافذ المنبثقة ==================== */
-  function initModals() {
-    const modalTriggers = document.querySelectorAll('[data-modal]');
-    const modalCloseButtons = document.querySelectorAll('.modal-close, .modal-overlay');
-    
-    // فتح المودال
-    modalTriggers.forEach(function(trigger) {
-      trigger.addEventListener('click', function(e) {
-        e.preventDefault();
-        const modalId = this.getAttribute('data-modal');
-        openModal(modalId);
-      });
-    });
-    
-    // إغلاق المودال
-    modalCloseButtons.forEach(function(closeBtn) {
-      closeBtn.addEventListener('click', function() {
-        const modal = this.closest('.modal-overlay');
-        if (modal) {
-          modal.classList.remove('active');
-        }
-      });
-    });
-    
-    // إغلاق عند الضغط على Escape
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
-        const activeModal = document.querySelector('.modal-overlay.active');
-        if (activeModal) {
-          activeModal.classList.remove('active');
-        }
-      }
-    });
-  }
-
-  function openModal(modalId) {
-    const modal = document.getElementById(modalId);
-    if (modal) {
-      // إغلاق أي مودال مفتوح
-      const activeModals = document.querySelectorAll('.modal-overlay.active');
-      activeModals.forEach(function(m) {
-        m.classList.remove('active');
-      });
-      
-      modal.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-  }
-
-  /* ==================== النسخ إلى الحافظة ==================== */
-  function initCopyButtons() {
-    const copyButtons = document.querySelectorAll('[data-copy]');
-    
-    copyButtons.forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        const targetId = this.getAttribute('data-copy');
-        const targetElement = document.getElementById(targetId);
-        
-        if (targetElement) {
-          copyToClipboard(targetElement.textContent);
-        }
-      });
-    });
-  }
-
-  function copyToClipboard(text) {
-    navigator.clipboard.writeText(text).then(function() {
-      showNotification('success', 'تم النسخ', 'تم نسخ النص إلى الحافظة');
-    }).catch(function(err) {
-      console.error('فشل النسخ:', err);
-      showNotification('error', 'خطأ', 'حدث خطأ أثناء النسخ');
-    });
-  }
-
   /* ==================== الإشعارات ==================== */
-  function showNotification(type, title, message) {
-    // إزالة الإشعار السابق إن وجد
-    const existing = document.querySelector('.notification');
-    if (existing) {
-      existing.remove();
-    }
+  function createNotificationContainer() {
+    if (document.querySelector('.notification-container')) return;
     
-    const icons = {
-      success: 'fa-check-circle',
-      error: 'fa-times-circle',
-      warning: 'fa-exclamation-circle',
-      info: 'fa-info-circle'
-    };
+    const container = document.createElement('div');
+    container.className = 'notification-container';
+    document.body.appendChild(container);
+    DOM.notifications = container;
+  }
+
+  function showNotification(message, type) {
+    if (!DOM.notifications) return;
     
     const notification = document.createElement('div');
-    notification.className = 'notification ' + type;
-    notification.innerHTML = 
-      '<div class="notification-icon">' +
-        '<i class="fas ' + icons[type] + '"></i>' +
-      '</div>' +
-      '<div class="notification-content">' +
-        '<div class="notification-title">' + title + '</div>' +
-        '<div class="notification-message">' + message + '</div>' +
-      '</div>' +
-      '<div class="notification-close">' +
-        '<i class="fas fa-times"></i>' +
-      '</div>';
+    notification.className = 'notification ' + (type || 'info');
+    notification.innerHTML = '<span>' + message + '</span>';
     
-    document.body.appendChild(notification);
+    DOM.notifications.appendChild(notification);
     
-    // إظهار الإشعار
     setTimeout(function() {
-      notification.classList.add('show');
-    }, 100);
-    
-    // إخفاء الإشعار بعد 5 ثوانٍ
-    setTimeout(function() {
-      notification.classList.remove('show');
+      notification.classList.add('hiding');
       setTimeout(function() {
-        notification.remove();
+        if (notification.parentNode) {
+          notification.parentNode.removeChild(notification);
+        }
       }, 300);
-    }, 5000);
+    }, 3000);
+  }
+
+  /* ==================== placeholders ==================== */
+  function initPlaceholders() {
+    const placeholders = document.querySelectorAll('input[placeholder], textarea[placeholder]');
     
-    // زر الإغلاق
-    notification.querySelector('.notification-close').addEventListener('click', function() {
-      notification.classList.remove('show');
-      setTimeout(function() {
-        notification.remove();
-      }, 300);
+    placeholders.forEach(function(input) {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'input-wrapper';
+      
+      input.parentNode.insertBefore(wrapper, input);
+      wrapper.appendChild(input);
+      
+      if (input.value) {
+        wrapper.classList.add('has-value');
+      }
+      
+      input.addEventListener('input', function() {
+        if (this.value) {
+          wrapper.classList.add('has-value');
+        } else {
+          wrapper.classList.remove('has-value');
+        }
+      });
     });
   }
-
-  /* ==================== أدوات مساعدة ==================== */
-  function debounce(func, wait) {
-    let timeout;
-    return function executedFunction() {
-      const args = arguments;
-      const context = this;
-      
-      clearTimeout(timeout);
-      timeout = setTimeout(function() {
-        func.apply(context, args);
-      }, wait);
-    };
-  }
-
-  function throttle(func, limit) {
-    let inThrottle;
-    return function() {
-      const args = arguments;
-      const context = this;
-      
-      if (!inThrottle) {
-        func.apply(context, args);
-        inThrottle = true;
-        setTimeout(function() {
-          inThrottle = false;
-        }, limit);
-      }
-    };
-  }
-
-  /* ==================== تصدير الدوال العامة ==================== */
-  window.SCE = {
-    showNotification: showNotification,
-    copyToClipboard: copyToClipboard,
-    scrollToTop: scrollToTop,
-    validateField: validateField,
-    filterServices: function(category, search) {
-      filterServiceCards(category, search);
-    }
-  };
 
   /* ==================== بدء التنفيذ ==================== */
   if (document.readyState === 'loading') {
