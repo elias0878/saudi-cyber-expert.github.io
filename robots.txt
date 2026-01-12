@@ -1,0 +1,76 @@
+# Saudi Cyber Expert - Robots.txt
+# ملف robots.txt لموقع خبير الأمن السيبراني السعودي
+
+User-agent: *
+Allow: /
+
+# -----------------------
+#Allow crawling of important pages
+# -----------------------
+Sitemap: https://saudi-cyber-expert.github.io/sitemap.xml
+Sitemap: https://saudi-cyber-expert.github.io/sitemap.xml.gz
+
+# -----------------------
+# Disallow sensitive directories
+# -----------------------
+Disallow: /assets/js/
+Disallow: /assets/css/
+Disallow: /assets/images/
+Disallow: /_includes/
+Disallow: /_layouts/
+Disallow: /_plugins/
+Disallow: /.git/
+Disallow: /node_modules/
+
+# -----------------------
+# Allow indexing of main content
+# -----------------------
+Allow: /index.html
+Allow: /404.html
+Allow: /blog/
+
+# -----------------------
+# Crawl-delay (optional)
+# -----------------------
+Crawl-delay: 10
+
+# -----------------------
+# Host specification
+# -----------------------
+Host: https://saudi-cyber-expert.github.io
+
+# -----------------------
+# Google Image Bot
+# -----------------------
+User-agent: Googlebot-Image
+Allow: /images/
+
+# -----------------------
+# AdsBot Google
+# -----------------------
+User-agent: AdsBot-Google
+Allow: /
+
+# -----------------------
+# Other bots
+# -----------------------
+User-agent: Bingbot
+Allow: /
+
+User-agent: Yandex
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: Exabot
+Allow: /
+
+User-agent: FACEBOOKTOKEN
+Allow: /
+
+User-agent: Twitterbot
+Allow: /

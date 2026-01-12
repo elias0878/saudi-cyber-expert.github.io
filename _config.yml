@@ -1,0 +1,92 @@
+# Saudi Cyber Expert - Jekyll Configuration
+# إعدادات الموقع لجيت هب بيجز
+
+# -----------------------
+# الإعدادات الأساسية
+# -----------------------
+title: "خبير الأمن السيبراني السعودي | خدمات أمنية متكاملة"
+description: "خدمات أمن سيبراني متكاملة تشمل استعادة الحسابات، مكافحة الابتزاز الإلكتروني، فحص الأجهزة، والاستشارات الأمنية في المملكة العربية السعودية."
+url: "https://saudi-cyber-expert.github.io"
+baseurl: ""
+lang: "ar"
+dir: "rtl"
+
+# -----------------------
+# معلومات المؤلف
+# -----------------------
+author:
+  name: "خبير الأمن السيبراني السعودي"
+  email: "expert@saudi-cyber.com"
+  url: "https://saudi-cyber-expert.github.io"
+
+# -----------------------
+# إعدادات Jekyll
+# -----------------------
+markdown: kramdown
+highlighter: rouge
+permalink: /:title/
+
+# -----------------------
+# الإضافات (Plugins)
+# -----------------------
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
+  - jemoji
+
+# -----------------------
+# إعدادات SEO
+# -----------------------
+seo:
+  name: "خبير الأمن السيبراني السعودي"
+  description: "خدمات أمن سيبراني متكاملة في المملكة العربية السعودية. استعادة الحسابات، مكافحة الابتزاز، فحص الأجهزة، والاستشارات الأمنية."
+  logo: "/images/logo.png"
+  twitter:
+    username: "saudi_cyber_exp"
+  social:
+    name: "خبير الأمن السيبراني السعودي"
+    links:
+      - "https://twitter.com/saudi_cyber_exp"
+      - "https://instagram.com/saudi.cyber.expert"
+      - "https://linkedin.com/in/saudi-cyber-expert"
+
+# -----------------------
+# الإعدادات المحلية
+# -----------------------
+defaults:
+  -
+    scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+      dir: "rtl"
+      lang: "ar"
+
+# -----------------------
+# استبعاد الملفات
+# -----------------------
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - package.json
+  - package-lock.json
+  - "*.log"
+  - ".DS_Store"
+  - Thumbs.db
+
+# -----------------------
+# الإعدادات الزمنية
+# -----------------------
+timezone: Asia/Riyadh
+
+# -----------------------
+# خريطة الموقع
+# -----------------------
+sitemap:
+  exclude: "/assets/js/"
+  changefreq: "weekly"
+  priority: 0.8
